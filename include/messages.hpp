@@ -7,7 +7,7 @@ namespace protocol {
 namespace message {
 
 struct heartbeat_message_t {
-  static const int ID = 0xFE; // TODO: Probably make this 0x00
+  enum { ID = 0xFE };
 
   std::uint8_t seq;
 } __attribute__((packed));
