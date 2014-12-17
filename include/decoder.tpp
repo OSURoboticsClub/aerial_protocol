@@ -9,9 +9,7 @@ Decoder::Decoder()
 }
 
 template <std::size_t buffer_size>
-bool Decoder::process(std::uint8_t v, std::uint8_t *messageId,
-    std::uint16_t *messageSize, std::array<std::uint8_t, buffer_size> *out) {
-
+bool Decoder::process(std::uint8_t v, decoded_message_t<buffer_size> *message) {
   switch(state) {
     case DecodeState::WAIT_HEADER:
       if(v == MARK_BYTE) {

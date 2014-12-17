@@ -8,6 +8,13 @@
 
 namespace protocol {
 
+template <std::size_t buffer_size>
+struct decoded_message_t {
+  std::uint8_t id;
+  std::uint16_t size;
+  std::array<std::uint8_t, buffer_size> payload;
+};
+
 enum class DecodeState {
   /**
    * Have not received any bytes of this message yet. Waiting for header marker
@@ -41,8 +48,7 @@ public:
    * entire message.
    */
   template <std::size_t buffer_size>
-  bool process(std::uint8_t v, std::uint8_t *messageId,
-      std::uint16_t *messageSize, std::array<std::uint8_t, buffer_size> *out);
+  bool process(std::uint8_t v, decoded_message_t<buffer_size> *message);
 
   // TODO(kyle): Remove this
   void debug();
