@@ -19,6 +19,7 @@ bool Decoder::process(std::uint8_t v, decoded_message_t<buffer_size> *message) {
     case DecodeState::WAIT_ID:
       state = DecodeState::IN_MESSAGE;
       currentMessageId = v;
+      position = 0;
       leftToRead = message::length(currentMessageId);
       break;
     case DecodeState::IN_MESSAGE:
