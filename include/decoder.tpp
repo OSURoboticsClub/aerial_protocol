@@ -75,30 +75,5 @@ void Decoder::flush(decoded_message_t<buffer_size> *message) {
   std::copy_n(std::begin(buffer), position, std::begin(message->payload));
 }
 
-void Decoder::debug() {
-  std::cout << "State: ";
-  switch(state) {
-    case DecodeState::WAIT_HEADER:
-      std::cout << "WAIT_HEADER" << std::endl;
-      break;
-    case DecodeState::WAIT_ID:
-      std::cout << "WAIT_ID" << std::endl;
-      break;
-    case DecodeState::IN_MESSAGE:
-      std::cout << "IN_MESSAGE" << std::endl;
-      break;
-    case DecodeState::AFTER_ESC:
-      std::cout << "AFTER_ESC" << std::endl;
-      break;
-  }
-  std::cout << "Buffer: ";
-  for(std::size_t i = 0; i < position; i++) {
-    std::cout << "0x" << std::hex << (int) buffer[i] << " ";
-  }
-  std::cout << std::endl;
-  std::cout << "Left to read: " << std::dec << leftToRead << std::endl;
-  std::cout << "----------------------------------------" << std::endl;
-}
-
 }
 

@@ -50,9 +50,6 @@ public:
   template <std::size_t buffer_size>
   bool process(std::uint8_t v, decoded_message_t<buffer_size> *message);
 
-  // TODO(kyle): Remove this
-  void debug();
-
 private:
   /**
    * Append a single bye to the internal message buffer.
