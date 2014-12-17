@@ -59,6 +59,9 @@ private:
    */
   void append(std::uint8_t v);
 
+  template <std::size_t buffer_size>
+  void flush(decoded_message_t<buffer_size> *message);
+
   /**
    * The current decode state.
    */

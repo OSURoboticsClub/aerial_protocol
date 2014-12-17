@@ -33,9 +33,7 @@ bool Decoder::process(std::uint8_t v, decoded_message_t<buffer_size> *message) {
         // This is the last byte in the message.
         append(v);
 
-        *messageId = currentMessageId;
-        *messageSize = position;
-        std::copy_n(std::begin(buffer), position, std::begin(*out));
+        flush(message);
 
         state = DecodeState::WAIT_HEADER;
 
@@ -51,9 +49,7 @@ bool Decoder::process(std::uint8_t v, decoded_message_t<buffer_size> *message) {
       append(v);
 
       if(leftToRead == 0) {
-        *messageId = currentMessageId;
-        *messageSize = position;
-        std::copy_n(std::begin(buffer), position, std::begin(*out));
+        flush(message);
 
         state = DecodeState::WAIT_HEADER;
 
@@ -70,6 +66,13 @@ bool Decoder::process(std::uint8_t v, decoded_message_t<buffer_size> *message) {
 void Decoder::append(std::uint8_t v) {
   buffer[position++] = v;
   leftToRead--;
+}
+
+template <std::size_t buffer_size>
+void Decoder::flush(decoded_message_t<buffer_size> *message) {
+  message->id = currentMessageId;
+  message->size = position;
+  std::copy_n(std::begin(buffer), position, std::begin(message->payload));
 }
 
 void Decoder::debug() {
