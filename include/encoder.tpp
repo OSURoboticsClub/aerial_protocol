@@ -4,7 +4,7 @@ Encoder::Encoder() {
 }
 
 template <typename T, std::size_t buffer_size>
-void Encoder::encode(const T& message, std::array<std::uint8_t, buffer_size> *buffer) {
+std::uint16_t Encoder::encode(const T& message, std::array<std::uint8_t, buffer_size> *buffer) {
   std::uint16_t bufpos = 0;
   std::uint8_t *data = (std::uint8_t *) &message;
 
@@ -19,6 +19,8 @@ void Encoder::encode(const T& message, std::array<std::uint8_t, buffer_size> *bu
     // TODO(kyle): Make sure we don't write off the end of the buffer
     (*buffer)[bufpos++] = data[i];
   }
+
+  return bufpos;
 }
 
 }
