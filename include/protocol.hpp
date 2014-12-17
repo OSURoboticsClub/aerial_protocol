@@ -1,6 +1,8 @@
 #ifndef PROTOCOL_HPP_
 #define PROTOCOL_HPP_
 
+#include <cstdint>
+
 namespace protocol {
 
 const std::uint8_t MARK_BYTE = 0x67;
