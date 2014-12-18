@@ -33,6 +33,8 @@ std::uint16_t length(int id) {
       return sizeof(heartbeat_message_t);
     case log_message_t::ID:
       return sizeof(log_message_t);
+    case attitude_message_t::ID:
+      return sizeof(attitude_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
