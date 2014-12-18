@@ -1,10 +1,10 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "protocol.hpp"
-#include "messages.hpp"
-#include "encoder.hpp"
-#include "decoder.hpp"
+#include "protocol/protocol.hpp"
+#include "protocol/messages.hpp"
+#include "protocol/encoder.hpp"
+#include "protocol/decoder.hpp"
 
 TEST_CASE("encoder can encode a heartbeat message", "[encoder]") {
   protocol::Encoder encoder;
