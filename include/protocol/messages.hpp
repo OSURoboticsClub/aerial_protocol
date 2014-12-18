@@ -18,6 +18,14 @@ struct log_message_t {
   char data[255];
 };
 
+struct attitude_message_t {
+  enum { ID = 0x02 };
+
+  float roll;
+  float pitch;
+  float yaw;
+} __attribute__((packed));
+
 std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
   switch(id) {
