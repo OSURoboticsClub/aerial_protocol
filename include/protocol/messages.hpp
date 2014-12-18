@@ -16,7 +16,7 @@ struct log_message_t {
   enum { ID = 0x01 };
 
   char data[255];
-};
+} __attribute__((packed));
 
 struct attitude_message_t {
   enum { ID = 0x02 };
