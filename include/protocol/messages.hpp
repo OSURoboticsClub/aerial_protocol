@@ -7,13 +7,13 @@ namespace protocol {
 namespace message {
 
 struct heartbeat_message_t {
-  enum { ID = 0xFE };
+  enum { ID = 0x00 };
 
   std::uint8_t seq;
 } __attribute__((packed));
 
 struct log_message_t {
-  enum { ID = 0x02 };
+  enum { ID = 0x01 };
 
   char data[255];
 };
