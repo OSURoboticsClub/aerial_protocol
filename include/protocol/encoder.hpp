@@ -1,6 +1,7 @@
 #ifndef ENCODER_HPP_
 #define ENCODER_HPP_
 
+#include <array>
 #include <cstdint>
 
 namespace protocol {
