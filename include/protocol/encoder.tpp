@@ -10,7 +10,7 @@ std::uint16_t Encoder::encode(const T& message, std::array<std::uint8_t, buffer_
 
   (*buffer)[bufpos++] = protocol::MARK_BYTE;
   (*buffer)[bufpos++] = message.ID;
-  for(int i = 0; i < sizeof(message); i++) {
+  for(std::size_t i = 0; i < sizeof(message); i++) {
     // If this is a special byte, escape it
     if(data[i] == protocol::MARK_BYTE || data[i] == protocol::ESCAPE_BYTE) {
       (*buffer)[bufpos++] = protocol::ESCAPE_BYTE;
