@@ -26,6 +26,17 @@ struct attitude_message_t {
   float yaw;
 } __attribute__((packed));
 
+struct set_control_mode_message_t {
+  enum { ID = 0x03 };
+
+  enum class ControlMode {
+    MANUAL,
+    OFFBOARD
+  };
+
+  ControlMode mode;
+} __attribute__((packed));
+
 std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
   switch(id) {
@@ -35,6 +46,8 @@ std::uint16_t length(int id) {
       return sizeof(log_message_t);
     case attitude_message_t::ID:
       return sizeof(attitude_message_t);
+    case set_control_mode_message_t::ID:
+      return sizeof(set_control_mode_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
