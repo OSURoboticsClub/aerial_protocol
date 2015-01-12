@@ -40,7 +40,7 @@ enum class DecodeState {
 
 class Decoder {
 public:
-  Decoder();
+  inline Decoder();
 
   /**
    * Provide a single byte to the decoder, which will process it accordingly.
@@ -54,7 +54,7 @@ private:
   /**
    * Append a single bye to the internal message buffer.
    */
-  void append(std::uint8_t v);
+  inline void append(std::uint8_t v);
 
   template <std::size_t buffer_size>
   void flush(decoded_message_t<buffer_size> *message);

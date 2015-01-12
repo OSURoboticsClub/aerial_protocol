@@ -37,7 +37,7 @@ struct set_control_mode_message_t {
   ControlMode mode;
 } __attribute__((packed));
 
-std::uint16_t length(int id) {
+inline std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
   switch(id) {
     case heartbeat_message_t::ID:

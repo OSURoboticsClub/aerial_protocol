@@ -8,7 +8,7 @@ namespace protocol {
 
 class Encoder {
 public:
-  Encoder();
+  inline Encoder();
 
   template <typename T, std::size_t buffer_size>
   std::uint16_t encode(const T& message, std::array<std::uint8_t, buffer_size> *buffer);
