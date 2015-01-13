@@ -37,7 +37,7 @@ struct set_control_mode_message_t {
   ControlMode mode;
 } __attribute__((packed));
 
-struct offboard_attitutde_control_message_t {
+struct offboard_attitude_control_message_t {
   enum { ID = 0x04 };
 
   float roll;
@@ -57,8 +57,8 @@ inline std::uint16_t length(int id) {
       return sizeof(attitude_message_t);
     case set_control_mode_message_t::ID:
       return sizeof(set_control_mode_message_t);
-    case offboard_attitutde_control_message_t::ID:
-      return sizeof(offboard_attitutde_control_message_t);
+    case offboard_attitude_control_message_t::ID:
+      return sizeof(offboard_attitude_control_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
