@@ -26,8 +26,14 @@ struct attitude_message_t {
   float yaw;
 } __attribute__((packed));
 
-struct set_control_mode_message_t {
+struct set_arm_state_message_t {
   enum { ID = 0x03 };
+
+  bool armed;
+} __attribute__((packed));
+
+struct set_control_mode_message_t {
+  enum { ID = 0x04 };
 
   enum class ControlMode {
     MANUAL,
@@ -38,7 +44,7 @@ struct set_control_mode_message_t {
 } __attribute__((packed));
 
 struct offboard_attitude_control_message_t {
-  enum { ID = 0x04 };
+  enum { ID = 0x05 };
 
   float roll;
   float pitch;
@@ -55,6 +61,8 @@ inline std::uint16_t length(int id) {
       return sizeof(log_message_t);
     case attitude_message_t::ID:
       return sizeof(attitude_message_t);
+    case set_arm_state_message_t::ID:
+      return sizeof(set_arm_state_message_t);
     case set_control_mode_message_t::ID:
       return sizeof(set_control_mode_message_t);
     case offboard_attitude_control_message_t::ID:
