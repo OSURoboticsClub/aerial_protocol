@@ -21,9 +21,7 @@ struct log_message_t {
 struct attitude_message_t {
   enum { ID = 0x02 };
 
-  float roll;
-  float pitch;
-  float yaw;
+  float dcm[9];
 } __attribute__((packed));
 
 struct set_arm_state_message_t {
