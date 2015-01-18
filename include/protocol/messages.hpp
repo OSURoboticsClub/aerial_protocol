@@ -48,6 +48,8 @@ struct offboard_attitude_control_message_t {
   float pitch;
   float yaw;
   float throttle;
+  uint16_t buttons;   // Bitfield of buttons
+  uint8_t mode;
 } __attribute__((packed));
 
 struct motor_throttle_message_t {
