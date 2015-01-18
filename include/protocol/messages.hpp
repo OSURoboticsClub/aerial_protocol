@@ -50,6 +50,12 @@ struct offboard_attitude_control_message_t {
   float throttle;
 } __attribute__((packed));
 
+struct motor_throttle_message_t {
+  enum { ID = 0x06 };
+
+  float throttles[4];
+} __attribute__((packed));
+
 inline std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
   switch(id) {
@@ -65,6 +71,8 @@ inline std::uint16_t length(int id) {
       return sizeof(set_control_mode_message_t);
     case offboard_attitude_control_message_t::ID:
       return sizeof(offboard_attitude_control_message_t);
+    case motor_throttle_message_t::ID:
+      return sizeof(motor_throttle_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
