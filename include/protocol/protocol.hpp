@@ -1,14 +1,10 @@
-#ifndef PROTOCOL_HPP_
-#define PROTOCOL_HPP_
+#ifndef PROTOCOL_PROTOCOL_HPP_
+#define PROTOCOL_PROTOCOL_HPP_
 
-#include <cstdint>
-
-namespace protocol {
-
-const std::uint8_t MARK_BYTE = 0x67;
-const std::uint8_t ESCAPE_BYTE = 0x68;
-
-}
+#include "protocol/constants.hpp"
+#include "protocol/messages.hpp"
+#include "protocol/encoder.hpp"
+#include "protocol/decoder.hpp"
 
 #endif // PROTOCOL_HPP_
 

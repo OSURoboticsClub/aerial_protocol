@@ -1,10 +1,10 @@
-#ifndef DECODER_HPP_
-#define DECODER_HPP_
+#ifndef PROTOCOL_DECODER_HPP_
+#define PROTOCOL_DECODER_HPP_
 
 #include <array>
 #include <cstdint>
 
-#include "protocol.hpp"
+#include "protocol/constants.hpp"
 
 namespace protocol {
 
