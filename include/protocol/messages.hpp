@@ -58,6 +58,23 @@ struct motor_throttle_message_t {
   float throttles[4];
 } __attribute__((packed));
 
+struct sensor_calibration_request_message_t {
+  enum { ID = 0x07 };
+} __attribute__((packed));
+
+struct sensor_calibration_response_message_t {
+  enum { ID = 0x08 };
+
+  enum class SensorType {
+    ACCEL,
+    GYRO,
+    MAG
+  };
+
+  SensorType type;
+  float offsets[3];
+} __attribute__((packed));
+
 inline std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
   switch(id) {
@@ -75,6 +92,10 @@ inline std::uint16_t length(int id) {
       return sizeof(offboard_attitude_control_message_t);
     case motor_throttle_message_t::ID:
       return sizeof(motor_throttle_message_t);
+    case sensor_calibration_request_message_t::ID:
+      return sizeof(sensor_calibration_request_message_t);
+    case sensor_calibration_response_message_t::ID:
+      return sizeof(sensor_calibration_response_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
