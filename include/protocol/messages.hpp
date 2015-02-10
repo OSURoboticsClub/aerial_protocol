@@ -15,7 +15,7 @@ struct heartbeat_message_t {
 struct log_message_t {
   enum { ID = 0x01 };
 
-  char data[255];
+  char data[100];
 } __attribute__((packed));
 
 struct attitude_message_t {
