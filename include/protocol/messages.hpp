@@ -75,6 +75,14 @@ struct sensor_calibration_response_message_t {
   float offsets[3];
 } __attribute__((packed));
 
+struct location_message_t {
+  enum { ID = 0x09 };
+
+  float lat;
+  float lon;
+  float alt;
+} __attribute__((packed));
+
 inline std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
   switch(id) {
@@ -96,6 +104,8 @@ inline std::uint16_t length(int id) {
       return sizeof(sensor_calibration_request_message_t);
     case sensor_calibration_response_message_t::ID:
       return sizeof(sensor_calibration_response_message_t);
+    case location_message_t::ID:
+      return sizeof(location_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
