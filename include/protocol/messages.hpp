@@ -83,6 +83,20 @@ struct location_message_t {
   float alt;
 } __attribute__((packed));
 
+struct imu_message_t {
+  enum { ID = 0x0a };
+
+  float gyro[3];
+  float accel[3];
+} __attribute__((packed));
+
+struct system_message_t {
+  enum { ID = 0x0b };
+
+  uint8_t state;
+  float motorDC;   // TODO(yoos): Hack for esra test launch
+} __attribute__((packed));
+
 inline std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
   switch(id) {
@@ -106,6 +120,10 @@ inline std::uint16_t length(int id) {
       return sizeof(sensor_calibration_response_message_t);
     case location_message_t::ID:
       return sizeof(location_message_t);
+    case imu_message_t::ID:
+      return sizeof(imu_message_t);
+    case system_message_t::ID:
+      return sizeof(system_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
