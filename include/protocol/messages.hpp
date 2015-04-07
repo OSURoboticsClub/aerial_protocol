@@ -15,12 +15,14 @@ struct heartbeat_message_t {
 struct log_message_t {
   enum { ID = 0x01 };
 
+  uint32_t time;
   char data[100];
 } __attribute__((packed));
 
 struct attitude_message_t {
   enum { ID = 0x02 };
 
+  uint32_t time;
   float dcm[9];
 } __attribute__((packed));
 
@@ -55,6 +57,7 @@ struct offboard_attitude_control_message_t {
 struct motor_throttle_message_t {
   enum { ID = 0x06 };
 
+  uint32_t time;
   float throttles[4];
 } __attribute__((packed));
 
@@ -78,6 +81,7 @@ struct sensor_calibration_response_message_t {
 struct location_message_t {
   enum { ID = 0x09 };
 
+  uint32_t time;
   float lat;
   float lon;
   float alt;
@@ -86,6 +90,7 @@ struct location_message_t {
 struct imu_message_t {
   enum { ID = 0x0a };
 
+  uint32_t time;
   float gyro[3];
   float accel[3];
 } __attribute__((packed));
@@ -93,6 +98,7 @@ struct imu_message_t {
 struct system_message_t {
   enum { ID = 0x0b };
 
+  uint32_t time;
   uint8_t state;
   float motorDC;   // TODO(yoos): Hack for esra test launch
 } __attribute__((packed));
