@@ -89,10 +89,9 @@ struct location_message_t {
 
 struct imu_message_t {
   enum { ID = 0x0a };
-
   uint32_t time;
-  float gyro[3];
-  float accel[3];
+  float gyro[3];     // Gyroscope
+  float accel[3];    // Accelerometer
 } __attribute__((packed));
 
 struct system_message_t {
@@ -102,6 +101,30 @@ struct system_message_t {
   uint8_t state;
   float motorDC;   // TODO(yoos): Hack for esra test launch
 } __attribute__((packed));
+
+struct raw_1000_message_t {
+  enum { ID = 0x0c };
+  uint32_t time;
+  float accel[3];    // Accelerometer
+  float accelH[3];   // High-g accel
+  float gyro[3];     // Gyroscope
+} __attribute__((packed));
+
+struct raw_50_message_t {
+  enum { ID = 0x0d };
+  uint32_t time;
+  float bar;   // Barometric pressure
+  float temp;   // Temperature
+  float mag[3];   // Magnetometer
+} __attribute((packed));
+
+struct raw_10_message_t {
+  enum { ID = 0x0e };
+  uint32_t time;
+  float lat;
+  float lon;
+  float utc;   // UTC time
+} __attribute((packed));
 
 inline std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
@@ -130,6 +153,12 @@ inline std::uint16_t length(int id) {
       return sizeof(imu_message_t);
     case system_message_t::ID:
       return sizeof(system_message_t);
+    case raw_1000_message_t::ID:
+      return sizeof(raw_1000_message_t);
+    case raw_50_message_t::ID:
+      return sizeof(raw_50_message_t);
+    case raw_10_message_t::ID:
+      return sizeof(raw_10_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
