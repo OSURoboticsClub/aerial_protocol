@@ -121,6 +121,7 @@ struct raw_50_message_t {
 struct raw_10_message_t {
   enum { ID = 0x0e };
   uint32_t time;
+  bool gps_valid;
   float lat;
   float lon;
   float utc;   // UTC time
