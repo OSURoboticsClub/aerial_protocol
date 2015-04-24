@@ -127,6 +127,13 @@ struct raw_10_message_t {
   float utc;   // UTC time
 } __attribute((packed));
 
+struct fs_info_message_t {
+  enum { ID = 0x0f };
+  uint32_t time;
+  char fname[32];
+  uint32_t fsize;
+} __attribute((packed));
+
 inline std::uint16_t length(int id) {
   // TODO(kyle): sizeof(empty struct) is 1 in C++...
   switch(id) {
@@ -160,6 +167,8 @@ inline std::uint16_t length(int id) {
       return sizeof(raw_50_message_t);
     case raw_10_message_t::ID:
       return sizeof(raw_10_message_t);
+    case fs_info_message_t::ID:
+      return sizeof(fs_info_message_t);
   }
 
   return 0; // TODO(kyle): Return something more meaningful?
