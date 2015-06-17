@@ -125,6 +125,7 @@ struct raw_10_message_t {
   float lat;
   float lon;
   float utc;   // UTC time
+  uint16_t geigerCount;   // Number of blips counted since last report
 } __attribute((packed));
 
 struct fs_info_message_t {
