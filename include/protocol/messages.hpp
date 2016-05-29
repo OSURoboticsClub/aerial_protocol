@@ -6,12 +6,17 @@
 namespace protocol {
 namespace message {
 
+// NOTE: message types indicated with downlink/uplink use
+
+// Heartbeat (down)
 struct heartbeat_message_t {
   enum { ID = 0x00 };
 
   std::uint8_t seq;
 } __attribute__((packed));
 
+// Log (up)
+// TODO(syoo): this is unused
 struct log_message_t {
   enum { ID = 0x01 };
 
@@ -19,6 +24,7 @@ struct log_message_t {
   char data[100];
 } __attribute__((packed));
 
+// Attitude in DCM (down)
 struct attitude_message_t {
   enum { ID = 0x02 };
 
@@ -26,12 +32,14 @@ struct attitude_message_t {
   float dcm[9];
 } __attribute__((packed));
 
+// Set arm state (up)
 struct set_arm_state_message_t {
   enum { ID = 0x03 };
 
   bool armed;
 } __attribute__((packed));
 
+// Set control mode (up)
 struct set_control_mode_message_t {
   enum { ID = 0x04 };
 
@@ -43,6 +51,7 @@ struct set_control_mode_message_t {
   ControlMode mode;
 } __attribute__((packed));
 
+// Joystick input (up)
 struct offboard_attitude_control_message_t {
   enum { ID = 0x05 };
 
@@ -54,6 +63,7 @@ struct offboard_attitude_control_message_t {
   uint8_t mode;
 } __attribute__((packed));
 
+// Throttle (down)
 struct motor_throttle_message_t {
   enum { ID = 0x06 };
 
@@ -61,10 +71,12 @@ struct motor_throttle_message_t {
   float throttles[4];
 } __attribute__((packed));
 
+// Sensor calibration request (up)
 struct sensor_calibration_request_message_t {
   enum { ID = 0x07 };
 } __attribute__((packed));
 
+// Sensor calibration response (down)
 struct sensor_calibration_response_message_t {
   enum { ID = 0x08 };
 
@@ -78,6 +90,7 @@ struct sensor_calibration_response_message_t {
   float offsets[3];
 } __attribute__((packed));
 
+// Location (down)
 struct location_message_t {
   enum { ID = 0x09 };
 
@@ -87,6 +100,7 @@ struct location_message_t {
   float alt;
 } __attribute__((packed));
 
+// IMU (down)
 struct imu_message_t {
   enum { ID = 0x0a };
   uint32_t time;
@@ -94,6 +108,7 @@ struct imu_message_t {
   float accel[3];    // Accelerometer
 } __attribute__((packed));
 
+// System (down)
 struct system_message_t {
   enum { ID = 0x0b };
 
@@ -102,6 +117,7 @@ struct system_message_t {
   float motorDC;   // TODO(yoos): Hack for esra test launch
 } __attribute__((packed));
 
+// 1000 Hz stream (down)
 struct raw_1000_message_t {
   enum { ID = 0x0c };
   uint32_t time;
@@ -110,6 +126,7 @@ struct raw_1000_message_t {
   float gyro[3];     // Gyroscope
 } __attribute__((packed));
 
+// 50 Hz stream (down)
 struct raw_50_message_t {
   enum { ID = 0x0d };
   uint32_t time;
@@ -118,6 +135,7 @@ struct raw_50_message_t {
   float mag[3];   // Magnetometer
 } __attribute((packed));
 
+// 10 Hz stream (down)
 struct raw_10_message_t {
   enum { ID = 0x0e };
   uint32_t time;
@@ -128,6 +146,7 @@ struct raw_10_message_t {
   uint16_t geigerCount;   // Number of blips counted since last report
 } __attribute((packed));
 
+// Filesystem (down)
 struct fs_info_message_t {
   enum { ID = 0x0f };
   uint32_t time;
